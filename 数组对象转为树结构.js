@@ -39,6 +39,26 @@ const listToTree = (list) => {
   return result
 }
 
+
+/**
+ * 递归实现
+ * @param list 源数组
+ * @param parentId 父级 id
+ * @returns newList 新数组
+ */
+const buildArrayTree = (arr, pid = -1) => {
+  // 先找到根节点
+  return arr.filter(i => i.pid === pid)
+    // 再把对应的子节点往根节点里面塞
+    .map(i => ({
+      id: i.id,
+      pid: i.pid,
+      children: buildArrayTree(arr, i.id)
+    }))
+}
+
+
+
 const data = [
   {
     pid: '-1',
